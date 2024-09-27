@@ -1,0 +1,672 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="timeFunction(), showDate(), showDatePlus()" class="bg-[#F2F2F2]">
+    <div class="fixed top-[-400px] w-[600px] h-[200px] bg-white rounded-[12px] z-50 left-[50%] -ml-[300px] shadow-2xl max-[650px]:w-[90%] max-[650px]:left-[5%] max-[650px]:ml-0 text-2xl p-5 transition-all overflow-auto" id="pop-up" onclick="disappear()">
+        <p>This is a message for you. If you are reading this, I am most probably asleep.   </p>
+    </div>
+    <header class="max-w-[1700px] mx-auto">
+        <div class="w-100 md:w-[95%] mx-auto flex items-center justify-between pb-5 md:pb-0 md:h-[70px]">
+            <div class="flex items-center h-full md:justify-normal justify-between w-[100vw] md:w-100">
+                <div class="w-[50px] h-[50px] bg-gray-300 md:hidden">
+                    <img src="assets/gps.png" alt="" class="mx-auto relative top-[15px]">
+                </div>
+                <img src="assets/Logo base.png" alt="">
+                <div class="w-[50px] h-[50px] md:w-[244px] md:flex md:items-center md:h-full hidden">
+                    <img src="assets/gps.png" alt="" class="mx-auto relative top-[15px] md:ml-[20%] md:mr-0 md:static">
+                    <p class="ml-[5px]">Санкт-Петербург</p>
+                </div>
+                <div class="w-[50px] h-[50px] bg-gray-200 md:w-[144px] md:flex md:items-center md:h-full lg:mx-auto lg:bg-transparent">
+                    <img src="assets/menu.png" alt="" class="mx-auto relative top-[15px] md:ml-[20%] md:mr-0 md:static">
+                    <p class="ml-[5px] md:block hidden">Меню</p>
+                </div>
+            </div>
+            <div class="w-[50px] h-[50px] md:w-[404px] md:flex md:items-center md:h-full hidden md:block mr-[20px]">
+                <p class="font-medium hidden lg:block">ENG</p>
+                <img src="assets/eye.png" alt="" class="mx-auto relative top-[15px] md:ml-[20%] md:mr-[10px] md:static">
+                <p class="min-w-[200px]">Версия для слабовидящих</p>
+            </div>
+        </div>
+    </header>
+    <section class="w-full bg-cover bg-no-repeat bg-[center_-100px] overflow-hidden" style="background-image: url(assets/back\ \(1\).png);">
+        <div class="container mx-auto p-5 relative z-10 md:flex lg:justify-between">
+            <div class="rounded-[8px] bg-emerald-600 w-[64px] h-[500px] relative top-[350px] px-[14px] py-[84px] hidden lg:block">
+                <img src="assets/item_menu.png" alt="" class="mb-[30px]">
+                <img src="assets/item_menu (1).png" alt="" class="mb-[30px]">
+                <div class="opacity-15 bg-white w-[20px] h-[2px] rounded-[2px] mx-auto mb-[30px]"></div>
+                <img src="assets/item_menu (2).png" alt="" class="mb-[30px]">
+                <img src="assets/item_menu (3).png" alt="" class="mb-[30px]">
+                <img src="assets/item_menu (4).png" alt="">
+            </div>
+            <div class="w-fit">
+                <h1 class="font-sans text-2xl font-medium text-white mt-[70px] max-w-[152px] md:text-[40px] md:mb-[60px]">Насладитесь гармонией арктики</h1>
+                <p class="max-w-[287px] text-white font-light mt-[40px] font-sans md:max-w-[450px]">Мы создали уникальную систему подбора маршрутов, которая учитывает множество скрытых факторов, чтобы насладиться отдыхом сполна.</p>
+                <button class="rounded-[7px] bg-emerald-600 pt-[10px] pl-[32px] pb-[10px] pr-[32px] mt-[28px] md:mt-[80px]">
+                    <p class="text-[12px] text-white text-normal">Пройти опрос</p>
+                </button>
+            </div>
+            <div class="overflow-hidden w-[290px] mx-auto md:mx-0 flex gap-[50px]">   
+                <div class="w-fit mx-auto md:static md:mr-0 lg:w-[240px] lg:mr-0 transition-all ml-[15px] lg:ml-[17px] md:ml-[12px]" id="news">
+                    <div class="bg-white rounded-[12px] w-9/12 mt-20 mx-auto min-w-[260px] p-[17px] max-w-[400px]">
+                        <div class="flex justify-between">
+                            <div class="flex items-center">
+                                <img src="assets/location.png" alt="">
+                                <p class="font-normal font-sans ml-5">Салехард</p>
+                            </div>
+                            <p id="showTime" class="font-light font-sans text-gray-800"></p>
+                        </div>
+                        <div class="flex justify-between mt-[50px]">
+                            <div class="flex items-center">
+                                <img src="assets/wind.png" alt="">
+                                <p class="font-medium font-sans ml-5 text-emerald-600">4 м/с</p>
+                            </div>
+                            <div class="flex items-center">
+                                <p class="text-2xl font-mono text-emerald-600">+13°C</p>
+                                <img src="assets/cloud-sunny.png" alt="" class="ml-[7px]">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-[12px] w-9/12 mt-20 mx-auto min-w-[260px] p-[17px] max-w-[400px] relative">
+                        <img src="assets/button_icon.png" alt="" class="absolute shadow-lg -right-[15px] top-1/3" onclick="moveRight()">
+                        <img src="assets/button_icon.png" alt="" class="rotate-180 absolute shadow-lg -left-[15px] top-1/3" onclick="moveLeft()">
+                        <div class="flex justify-between">
+                            <div class="flex items-center">
+                                <img src="assets/location.png" alt="">
+                                <p class="font-normal font-sans ml-5">Северное сияние</p>
+                            </div>
+                            <p id="showDate" class="font-light font-sans text-gray-800"></p>
+                        </div>
+                        <div class="flex justify-between mt-[50px]">
+                            <p class="mx-auto min-w-fit"><span class="text-2xl text-emerald-600 font-sans font-semibold">7 уровень</span> из 10</p>
+                        </div>
+                    </div>
+                    <div class="shadow-lg bg-white rounded-[12px] w-9/12 mt-20 mx-auto min-w-[260px] p-[17px] max-w-[400px] relative">
+                        <h3 class="text-emerald-600 text-2xl font-medium mb-3">Обратите внимание!</h3>
+                        <p class="mb-4">В регионе есть территории, которые требуют специального прокуска для нахождения там.</p>
+                        <div class="bg-gray-300 w-100 h-[1px]"></div>
+                        <aside class="mt-4 flex items-start">
+                            <img src="assets/scanning.png" alt="" class="mt-[3px] mr-[10px]">
+                            <p>Пограничные зоны и особо охраняемые природные территории</p>
+                        </aside>
+                    </div>
+                </div>
+                <div class="w-fit mx-auto md:static md:ml-auto md:mr-0 lg:w-[240px] md:ml-[15px] lg:mr-0 transition-all ml-[0px] lg:ml-[17px]" id="newsSecondary">
+                    <div class="bg-white rounded-[12px] w-9/12 mt-20 mx-auto min-w-[260px] p-[17px] max-w-[400px]">
+                        <div class="flex justify-between">
+                            <div class="flex items-center">
+                                <img src="assets/location.png" alt="">
+                                <p class="font-normal font-sans ml-5">Салехард</p>
+                            </div>
+                            <p id="showTime" class="font-light font-sans text-gray-800">завтра</p>
+                        </div>
+                        <div class="flex justify-between mt-[50px]">
+                            <div class="flex items-center">
+                                <img src="assets/wind.png" alt="">
+                                <p class="font-medium font-sans ml-5 text-emerald-600">4 м/с</p>
+                            </div>
+                            <div class="flex items-center">
+                                <p class="text-2xl font-mono text-emerald-600">+13°C</p>
+                                <img src="assets/cloud-sunny.png" alt="" class="ml-[7px]">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-[12px] w-9/12 mt-20 mx-auto min-w-[260px] p-[17px] max-w-[400px] relative">
+                        <img src="assets/button_icon.png" alt="" class="absolute shadow-lg -right-[15px] top-1/3" onclick="moveRightSecondary()">
+                        <img src="assets/button_icon.png" alt="" class="rotate-180 absolute shadow-lg -left-[15px] top-1/3" onclick="moveLeftSecondary()">
+                        <div class="flex justify-between">
+                            <div class="flex items-center">
+                                <img src="assets/location.png" alt="">
+                                <p class="font-normal font-sans ml-5">Северное сияние</p>
+                            </div>
+                            <p id="showDateMore" class="font-light font-sans text-gray-800"></p>
+                        </div>
+                        <div class="flex justify-between mt-[50px]">
+                            <p class="mx-auto min-w-fit"><span class="text-2xl text-emerald-600 font-sans font-semibold">7 уровень</span> из 10</p>
+                        </div>
+                    </div>
+                    <div class="shadow-lg bg-white rounded-[12px] w-9/12 mt-20 mx-auto min-w-[260px] p-[17px] max-w-[400px] relative">
+                        <h3 class="text-emerald-600 text-2xl font-medium mb-3">Обратите внимание!</h3>
+                        <p class="mb-4">В регионе есть территории, которые требуют специального прокуска для нахождения там.</p>
+                        <div class="bg-gray-300 w-100 h-[1px]"></div>
+                        <aside class="mt-4 flex items-start">
+                            <img src="assets/scanning.png" alt="" class="mt-[3px] mr-[10px]">
+                            <p>Пограничные зоны и особо охраняемые природные территории</p>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mt-[200px] p-2 md:mt-[100px]">
+        <div class="flex justify-between mx-auto w-[300px] relative md:hidden">
+            <div class="bg-gray-100 opacity-90 p-3 shadow-2xl w-[145px] rounded-[12px] absolute -top-[40px]">
+                <h3 class="text-emerald-600">> 50 000</h3>
+                <p class="text-[10px] font-medium">ручьев, озер и рек</p>
+            </div>  
+            <img src="assets/Rectangle 6.png" alt="">
+            <img src="assets/Rectangle 8.png" alt="">
+            <div class="bg-gray-100 opacity-90 p-3 shadow-2xl w-[145px] rounded-[12px] absolute -bottom-[40px] right-[0px] flex">
+                <div>
+                    <h3 class="text-emerald-600">2293 видов</h3>
+                    <p class="text-[10px] font-medium">животных и птиц</p>
+                </div>
+            </div> 
+        </div>
+        <div class="container mx-auto md:flex">
+            <div class="md:w-[60%] w-100 lg:w-[55%]">
+                <h1 class="text-[25px] mt-[70px] font-semibold font-serif">— Если вы пришелец, почему говорите, как северянин?! <br>— У многих планет есть север</h1>
+                <p class="font-thin mt-[20px]">© «Доктор Кто» (2005)</p>
+                <p class="mt-[50px]">Равным образом, структура организации требует анализа кластеризации усилий. Каждый из нас понимает очевидную вещь: разбавленное изрядной долей эмпатии.</p>
+                <button class="rounded-[7px] bg-emerald-600 pt-[10px] pl-[32px] pb-[10px] pr-[32px] mt-[28px] text-white">О Ямале</button>
+            </div>
+            <div class="hidden md:block mt-[70px] w-[40%] max-h-[500px] xl:mt-0 relative">
+                <div class="bg-gray-100 opacity-90 p-3 shadow-2xl w-[145px] rounded-[12px] absolute mt-[100px]  xl:-right-[30px]">
+                    <h3 class="text-emerald-600">> 50 000</h3>
+                    <p class="text-[10px] font-medium">ручьев, озер и рек</p>
+                </div> 
+                <div class="xl:flex lg:justify-between  xl:w-[480px] hidden xl:block">
+                    <img src="assets/Rectangle 6 (1).png" alt="" class="w-[90%] ml-auto mb-5 h-[60%] object-cover xl:h-[200px] xl:w-[280px] xl:ml-0">
+                    <img src="assets/Rectangle 8 (2).png" alt="" class="w-[90%] ml-auto h-[40%] object-cover xl:h-[200px] xl:w-[180px] xl:ml-0">
+                </div>
+                <div class="xl:flex xl:justify-between xl:w-[480px]">
+                    <img src="assets/Rectangle 9.png" alt="" class="w-[90%] ml-auto mb-5 h-[60%] object-cover xl:h-[200px] xl:w-[180px] xl:ml-0">
+                    <img src="assets/Rectangle 7.png" alt="" class="w-[90%] ml-auto h-[40%] object-cover xl:h-[200px] xl:w-[280px] xl:ml-0">
+                </div>
+                <div class="bg-gray-100 opacity-90 p-3 shadow-2xl w-[145px] rounded-[12px] absolute flex -mt-[130px] flex-col xl:-left-[30px]">
+                    <h3 class="text-emerald-600">2293 видов</h3>
+                    <p class="text-[10px] font-medium">животных и птиц</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mt-[100px] bg-gradient-to-r from-blue-900 to-emerald-500 relative">
+        <div class="container mx-auto flex items-center">
+            <img src="assets/Illustration line.png" alt="" class="object-cover absolute right-0 bottom-0 hidden md:block">
+            <div class="w-sm-[500px] ml-[20px] p-3 text-white pt-[20px] md:ml-0 relative z-20 md:mr-auto">
+                <h1 class="text-2xl mt-[10px] md:text-[35px] max-[860px]:max-w-[360px]">Скидки в заведениях Ямала</h1>
+                <p class="mt-[40px] md:max-w-[328px] text-sm max-w-[360px] lg:min-w-[500px]">Зарегистрируйтесь и получите электонную карту гостя, дающую скидку в заведениях Ямало-Ненецкого АО.</p>
+                <button class="rounded-[7px] bg-emerald-600 pt-[10px] px-5 py-3 mt-[28px] text-white mb-[22px] text-xs">Создать личный кабинет</button>
+            </div>
+            <div class="flex items-center hidden md:block relative z-10">
+                <div class="bg-gray-100 opacity-90 p-3 shadow-2xl w-[145px] rounded-[12px] absolute absolute] -top-[30px] right-[30px] z-50">
+                    <h3 class="text-emerald-600">658 мест</h3>
+                    <p class="text-[10px] font-medium">со скидкой для гостей</p>
+                </div> 
+                <div class="w-[205px] h-[294px] bg-white shadow-2xl absolute right-[200px] -top-[50px] p-[20px] z-30 hover:z-50 hover:scale-110 transition-all rounded-[12px] relative"> 
+                    <img src="assets/images.png" alt="">
+                    <h3 class="text-emerald-600 text-[14px] mt-[24px]">Ресторан «Край земли»</h3>
+                    <p class="text-[10px]">г. Салехард</p>
+                </div>
+                <div class="w-[205px] h-[294px] bg-white shadow-2xl absolute right-[50px] -bottom-[50px] p-[20px] z-40 hover:z-50 hover:scale-110 transition-all rounded-[12px]">
+                    <img src="assets/images (1).png" alt="">
+                    <h3 class="text-[14px] text-emerald-600 mt-[24px]">Музей истории Арктики</h3>
+                    <p class="text-[10px]">г. Новый Уренгой</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <img src="assets/icon (5).png" alt="" class="mx-auto block relative bottom-[40px] hidden md:block">
+    <article class="md:flex md:pl-[24px] items-start max-w-[1080px] mx-auto">
+        <section class="shadow-2xl mt-[150px] px-[24px] py-[22px] hidden md:block mr-[36px] relative bottom-[70px] rounded-[12px]">
+            <h2 class="font-medium text-center text-[22px]">Природа и приключения</h2>
+            <aside>
+                <div class="flex items-center bg-white shadow-2xl rounded-[12px] w-[276px] h-[64px] mx-auto mt-[24px]">
+                    <img src="assets/emoji-happy.png" alt="" class="ml-[24px]">
+                    <p class="ml-[24px]">Я — авантюрист</p>
+                </div>
+                <div class="flex items-center bg-white shadow-2xl rounded-[12px] w-[276px] h-[64px] mx-auto mt-[24px]">
+                    <img src="assets/emoji-normal.png" alt="" class="ml-[24px] mr-[24px]">
+                    <p>Очень интересно</p>
+                </div>  
+                <div class="flex items-center bg-white shadow-2xl rounded-[12px] w-[276px] h-[64px] mx-auto mt-[24px]">
+                    <img src="assets/emoji-normal (1).png" alt="" class="ml-[24px] mr-[24px]">
+                    <p>Только популярные места</p>
+                </div>
+                <div class="flex items-center bg-white shadow-2xl rounded-[12px] w-[276px] h-[64px] mx-auto mt-[24px]">
+                    <img src="assets/emoji-medium.png" alt="" class="ml-[24px] mr-[24px]">
+                    <p>Стараюсь избегать</p>
+                </div>
+                <div class="bg-gray-400 rounded-[50%] mt-[30px] mx-auto w-[4px] h-[4px]"></div>
+            </aside>
+        </section>
+        <section>
+            <div class="container mx-auto p-2">
+                <h1 class="mt-[71px] text-black opacity-100 text-2xl font-bold mb-[50px]">Рекомендованные машруты</h1>
+                <p>Ответьте на несколько вопросов, чтобы с высокой точностью посоветовать маршруты для путешествия по региону.</p>
+                <div class="mt-[50px] flex w-100 justify-between bg-no-repeat bg-[400%] bg-repeat-x" style="background-image: url(assets/track.png);">
+                    <div class="size-[44px] bg-indigo-800 text-white rounded-[12px]"><p class="relative top-[22%] max-w-fit mx-auto">1</p><div class="mt-[35px] w-100 shadow-xl rounded-[2%]"><img src="assets/button_icon (1).png" alt="" class="w-100 mx-auto"></div></div>
+                    <div class="size-[44px] bg-indigo-800 text-white rounded-[12px]"><p class="relative top-[22%] max-w-fit mx-auto">2</p><div class="mt-[50px] w-100 shadow-xl rounded-[50%] bg-emerald-600 h-[6px] w-[6px] mx-auto"></div></div>
+                    <div class="size-[44px] bg-gray-300 text-white rounded-[12px]"><p class="relative top-[22%] max-w-fit mx-auto">3</p></div>
+                    <div class="size-[44px] bg-gray-300 text-white rounded-[12px]"><p class="relative top-[22%] max-w-fit mx-auto">4</p></div>
+                    <div class="size-[44px] bg-gray-300 text-white rounded-[12px]"><p class="relative top-[22%] max-w-fit mx-auto">5</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="shadow-2xl mt-[150px] px-[24px] py-[22px] md:hidden rounded-[12px]">
+            <h2 class="font-medium text-center text-[22px]">Природа и приключения</h2>
+            <aside>
+                <div class="flex items-center bg-white shadow rounded-[12px] w-[276px] h-[64px] mx-auto mt-[24px]">
+                    <img src="assets/emoji-happy.png" alt="" class="ml-[24px]">
+                    <p class="ml-[24px]">Я — авантюрист</p>
+                </div>
+                <div class="flex items-center bg-white shadow rounded-[12px] w-[276px] h-[64px] mx-auto mt-[24px]">
+                    <img src="assets/emoji-normal.png" alt="" class="ml-[24px] mr-[24px]">
+                    <p>Очень интересно</p>
+                </div>  
+                <div class="flex items-center bg-white shadow rounded-[12px] w-[276px] h-[64px] mx-auto mt-[24px]">
+                    <img src="assets/emoji-normal (1).png" alt="" class="ml-[24px] mr-[24px]">
+                    <p>Только популярные места</p>
+                </div>
+                <div class="flex items-center bg-white shadow rounded-[12px] w-[276px] h-[64px] mx-auto mt-[24px]">
+                    <img src="assets/emoji-medium.png" alt="" class="ml-[24px] mr-[24px]">
+                    <p>Стараюсь избегать</p>
+                </div>
+                <div class="bg-gray-400 rounded-[50%] mt-[30px] mx-auto w-[4px] h-[4px]"></div>
+            </aside>
+        </section>
+    </article>
+    <section class="mx-auto text-center pt-[40px] pb-[40px] relative overflow-hidden md:pb-[250px]  max-w-[1700px]">
+        <img src="assets/way 02 (1).png" alt="" class="absolute -left-[60px] top-[25%] z-0 hidden md:block lg:left-[50px]">
+        <img src="assets/way 01.png" alt="" class="absolute -right-[70px] z-0 hidden md:block lg:right-[50px]">
+        <h1 class="font-medium font-medium text-2xl z-10 relative">Больше ничего не удивляет?</h1>
+        <p class="z-10 relative mt-[30px] md:max-w-[432px] text-center mx-auto">Составьте свой индивидуальный маршрут по региону, а мы поможем получить максимум от путешествия.</p>
+        <button class="z-10 relative px-[32px] py-[10px] bg-emerald-600 mt-[30px] text-white rounded-[7px] text-[12px]">Индивидуальный маршрут</button>
+    </section>
+    <section class="w-[100%] bg-yellow overflow-auto mb-[200px]">
+        <div class="w-[1084px] h-[99%] mx-auto md:w-[100%]">
+            <div class="w-fit mx-auto flex gap-[20px]">
+                <div class="hover:bg-white w-[256px] h-[350px] md:w-[165px] md:h-fit lg:w-[256px] rounded-[12px] hover:shadow-2xl px-[20px] pt-[20px] pb-[24px]">
+                    <img src="assets/images (5).png" alt="">
+                    <h2 class="text-emerald-600 text-[16px] md:w-165px font-medium mt-[26px]">Туры по Ямалу</h2>
+                    <p class="mt-[2px] text-[12px]">3524 позиций</p>
+                </div>
+                <div class="hover:bg-white w-[256px] h-[350px] md:h-fit md:w-[165px] lg:w-[256px] rounded-[12px] hover:shadow-2xl px-[20px] pt-[20px] pb-[24px] truncate">
+                    <img src="assets/images (4).png" alt="">
+                    <h2 class="text-emerald-600 text-[16px] font-medium mt-[26px]">Достопримечательности</h2>
+                    <p class="mt-[2px] text-[12px]">365 объектов</p>
+                </div>
+                <div class="hover:bg-white w-[256px] h-[350px] md:h-fit md:w-[165px] lg:w-[256px] rounded-[12px] hover:shadow-2xl px-[20px] pt-[20px] pb-[24px]">
+                    <img src="assets/images (2).png" alt="">
+                    <h2 class="text-emerald-600 text-[16px] font-medium mt-[26px]">Этнографические парки</h2>
+                    <p class="mt-[2px] text-[12px]">580 территорий</p>
+                </div>
+                <div class="hover:bg-white w-[256px] md:h-fit h-[350px] md:w-[165px] lg:w-[256px] rounded-[12px] hover:shadow-2xl px-[20px] pt-[20px] pb-[24px]">
+                    <img src="assets/images (3).png" alt="">
+                    <h2 class="text-emerald-600 text-[16px] font-medium mt-[26px]">Горнолыжные комплексы</h2>
+                    <p class="mt-[2px] text-[12px]">158 объектов</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="w-[95%] max-w-[1000px] mx-auto">
+            <div class="flex items-center gap-[15px] md:gap-[60px]">
+                <h2 class="text-2xl font-semibold">Афиша Ямала</h2>
+                <button class="flex items-center bg-white shadow px-[14px] gap-[10px] py-[10px] rounded-[7px] border-[1px] border-solid border-gray-200">
+                    <img src="assets/arrow-square-down.png" alt="">
+                    <p class="font-medium">Все города</p>
+                </button>
+            </div><p id="check" class="hidden">1</p>
+            <div class="mt-[30px] overflow-auto flex">
+                <button class="rounded-[7px] border-emerald-600 border-[2px] border-solid px-[32px] py-[10px] text-emerald-600" id="button1" onclick="buttonChange1()">Все</button>
+                <button class="rounded-[7px] hover:border-emerald-600 ml-[20px] md:ml-[5px] lg:ml-[20px] border-gray-100 border-[2px] border-solid px-[32px] py-[10px] text-emerald-600" id="button2" onclick="buttonChange2()">Праздник</button>
+                <button class="rounded-[7px] hover:border-emerald-600 ml-[20px] md:ml-[5px] lg:ml-[20px] border-gray-100 border-[2px] border-solid px-[32px] py-[10px] text-emerald-600" id="button3" onclick="buttonChange3()">Фестиваль</button>
+                <button class="rounded-[7px] hover:border-emerald-600 ml-[20px] md:ml-[5px] lg:ml-[20px] border-gray-100 border-[2px] border-solid px-[32px] py-[10px] text-emerald-600" id="button4" onclick="buttonChange4()">Кино</button>
+                <button class="rounded-[7px] hover:border-emerald-600 ml-[20px] md:ml-[5px] lg:ml-[20px] border-gray-100 border-[2px] border-solid px-[32px] py-[10px] text-emerald-600" id="button5" onclick="buttonChange5()">Театр</button>
+                <button class="rounded-[7px] hover:border-emerald-600 ml-[20px] md:ml-[5px] lg:ml-[20px] border-gray-100 border-[2px] border-solid px-[32px] py-[10px] text-emerald-600" id="button6" onclick="buttonChange6()">Концерт</button>
+            </div>
+        </div>
+    </section>
+    <section class="bg-white w-100 mt-[70px] pb-[200px]">
+        <div class="w-[95%] max-w-[1080px] mx-auto relative flex-col">
+            <img src="assets/button_icon (2).png" alt="" class="shadow-2xl absolute -right-[10px] hidden md:block transition-all" onclick="showCalendar()" id="calendarButton">
+            <div class="h-[84px] rounded-[12px] bg-white shadow-2xl w-[95%] md:w-100 mx-auto overflow-auto py-[10px] pl-[10px] relative bottom-[30px] transition-all" id="calendarFather"><p id="isCalendarOpen" class="hidden">1</p>
+                <div class="flex gap-[20px]">
+                    <div class="bg-emerald-600 h-[64px] w-[36px] rounded-[7px] text-center text-white pt-[5px] items-center shrink-0">
+                        <h2 class="font-bold">13</h2>
+                        <p class="font-light">пн</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">14</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">15</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">16</h2>
+                        <p class="font-light">чт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">17</h2>
+                        <p class="font-light">пт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">18</h2>
+                        <p class="font-light">сб</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">19</h2>
+                        <p class="font-light">вс</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">20</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">21</h2>
+                        <p class="font-light">вт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">22</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">23</h2>
+                        <p class="font-light">чт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">24</h2>
+                        <p class="font-light">пт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">25</h2>
+                        <p class="font-light">сб</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">26</h2>
+                        <p class="font-light">вс</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">27</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">28</h2>
+                        <p class="font-light">вт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">29</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">30</h2>
+                        <p class="font-light">чт</p>
+                    </div>
+                </div>
+                <div class="gap-[20px] relative top-[7px] hidden" id="calendar">
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">1</h2>
+                        <p class="font-light">пн</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">2</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">3</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">4</h2>
+                        <p class="font-light">чт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">5</h2>
+                        <p class="font-light">пт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">6</h2>
+                        <p class="font-light">сб</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">7</h2>
+                        <p class="font-light">вс</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">8</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h class="font-semibold">9</h2>
+                        <p class="font-light">вт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">10</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">11</h2>
+                        <p class="font-light">чт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">12</h2>
+                        <p class="font-light">пт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">13</h2>
+                        <p class="font-light">сб</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">14</h2>
+                        <p class="font-light">вс</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">15</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">16</h2>
+                        <p class="font-light">вт</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <div class="bg-emerald-600 w-[3px] h-[3px] rounded-[50%] absolute"></div>
+                        <h2 class="font-semibold">17</h2>
+                        <p class="font-light">ср</p>
+                    </div>
+                    <div class="h-full w-[36px] rounded-[7px] text-center pt-[5px] relative flex flex-col items-center shrink-0">
+                        <h2 class="font-semibold">18</h2>
+                        <p class="font-light">чт</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-[95%] max-w-[1080px] mx-auto">
+                <div class="flex overflow-auto gap-[10px] max-w-[1080px] w-100 lg:overflow-hidden">
+                    <div class="bg-transparent h-[216px] w-[200px] relative shrink-0">
+                        <div class="absolute top-[110px] right-[14px] bg-[#213A8F] px-[14px] py-[4px] rounded-[100px] text-white text-[12px]">Бесплатно</div>
+                        <img src="assets/Rectangle 15.png" alt="">
+                        <h2 class="mt-[24px] text-[#009974] text-[16px] font-medium">День оленевода</h2>
+                        <p class="text-[12px]">Праздник</p>
+                    </div>
+                    <div class="bg-transparent h-[216px] w-[200px] relative shrink-0">
+                        <div class="absolute top-[110px] right-[14px] bg-[#213A8F] px-[14px] py-[4px] rounded-[100px] text-white text-[12px]">Бесплатно</div>
+                        <img src="assets/Rectangle 15 (1).png" alt="">
+                        <h2 class="mt-[24px] text-[#009974] text-[16px] font-medium">Зимняя рыбалка</h2>
+                        <p class="text-[12px]">Фестиваль</p>
+                    </div>
+                    <div class="bg-transparent h-[216px] w-[200px] relative shrink-0">
+                        <div class="absolute top-[110px] right-[14px] bg-[#213A8F] px-[14px] py-[4px] rounded-[100px] text-white text-[12px]">от 1200₽</div>
+                        <img src="assets/Rectangle 15 (2).png" alt="">
+                        <h2 class="mt-[24px] text-[#009974] text-[16px] font-medium">Dakooka</h2>
+                        <p class="text-[12px]">Концерт</p>
+                    </div>
+                    <div class="bg-transparent h-[216px] w-[200px] relative shrink-0">
+                        <div class="absolute top-[110px] right-[14px] bg-[#213A8F] px-[14px] py-[4px] rounded-[100px] text-white text-[12px]">от 250₽</div>
+                        <img src="assets/Rectangle 15 (3).png" alt="">
+                        <h2 class="mt-[24px] text-[#009974] text-[16px] font-medium">Главный герой</h2>
+                        <p class="text-[12px]">Кино</p>
+                    </div>
+                    <div class="bg-transparent h-[216px] w-[200px] relative shrink-0">
+                        <div class="absolute top-[110px] right-[14px] bg-[#213A8F] px-[14px] py-[4px] rounded-[100px] text-white text-[12px]">от 250₽</div>
+                        <img src="assets/Rectangle 15 (4).png" alt="">
+                        <h2 class="mt-[24px] text-[#009974] text-[16px] font-medium">Небесная команда</h2>
+                        <p class="text-[12px]">Кино</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <article class="flex-row-reverse flex items-start md:mx-auto md:w-fit" id="contentFather">
+        <img src="assets/button_icon (2).png" alt="" class="hidden md:block" onclick="addContent()">
+            <section class="mx-auto overflow-auto flex gap-[10px] w-[97%] md:w-[95%] max-w-[1000px] relative bottom-[90px] rounded-[12px] md:mx-0">
+                <div class="rounded-[12px] bg-emerald-600 relative w-[97%] flex text-white justify-around bg-no-repeat bg-right md:pt-[30px] max-w-[860px] mx-auto shrink-0 md:mx-0" style="background-image: url(assets/Illustration.png);">
+                    <img src="assets/Сэр Ни 1.png" alt="" class="mr-auto ml-[20px] max-[300px]:hidden ">
+                    <img src="assets/Сэр Ни 1 (1).png" alt="" class="mr-auto relative right-[100px] hidden sm:block">
+                    <img src="assets/Сэр Ни 1 (2).png" alt="" class="mr-auto relative right-[200px] hidden sm:block">
+                    <div class="absolute right-[50px] max-[300px]:static max-[300px]:right-0 md:right-[90px] md:top-[5px]">
+                        <h1 class="text-[30px] font-bold">В гостях <br> у Сэр Ни</h1>
+                        <p class="font-semibold mt-[14px]">1 ноября 12:00</p>
+                        <p class="font-light mt-[13px]">Этнографический парк <br> «Кочевник»</p>
+                    </div>
+                    <div class="w-[87px] bg-[#213A8F] px-[14px] py-[4px] rounded-[100px] text-white text-[12px] absolute bottom-[14px] right-[14px] hidden md:block">Бесплатно</div>
+                </div>
+                <img src="assets/image-mine.png" alt="" class="object-cover shrink-0 h-[230px] w-[600px] rounded-[12px] hidden md:block">
+            </section>
+    </article>
+    <ul class="list-disc mx-auto w-fit -rotate-90 relative bottom-[80px] md:hidden">
+        <li class="text-gray-200"></li>
+        <li class="text-emerald-600"></li>
+        <li class="text-gray-200"></li>
+        <li class="text-gray-200"></li>
+        <li class="text-gray-200"></li>
+    </ul>
+    <section>
+        <div class="w-[90%] max-w-[1000px] mx-auto pl-[10px] md:flex flex-row-reverse">
+            <div class="flex justify-between w-100 min-[300px]:w-[300px] mx-auto relative md:w-[360px] lg:w-[400px]">
+                <div class="bg-gray-100 opacity-90 p-3 shadow-2xl w-[145px] rounded-[12px] absolute -top-[30px] md:top-[40px] md:-left-[30px]">
+                    <h3 class="text-emerald-600">> 50 000</h3>
+                    <p class="text-[10px] font-medium">ручьев, озер и рек</p>
+                </div> 
+                <img src="assets/Rectangle 6 (2).png" alt="" class="md:object-cover md:w-[360px] md:h-[258px] lg:w-[210px]">
+                <img src="assets/Rectangle 8 (4).png" alt="" class="hidden md:hidden lg:block object-cover object-right-top lg:w-[180px] lg:h-[258px] lg:block">
+                <img src="assets/Rectangle 8 (3).png" alt="" class="md:hidden lg:block object-cover object-right-top lg:w-[180px] lg:h-[258px] lg:hidden">
+            </div>
+            <div class="w-fit mx-auto">
+                <h1 class="text-[20px] font-bold mt-[50px]">Местный колорит</h1>
+                <p class="max-w-[350px] text-[14px] mt-[40px]">Равным образом, структура организации требует анализа кластеризации усилий. Каждый из нас понимает.</p>
+                <button class="px-[32px] py-[10px] bg-emerald-600 text-white rounded-[7px] text-[12px] mt-[20px]">Магазин сувениров</button>
+            </div>
+        </div>
+    </section>
+    <section class="w-[100%] bg-yellow overflow-auto mb-[200px] mt-[50px]">
+        <div class="w-[690px] h-[99%] mx-auto md:w-[100%]">
+            <div class="w-fit mx-auto flex gap-[10px]">
+                <div class="w-[156px] md:w-[165px] h-fit lg:w-[256px] rounded-[12px] hover:shadow-2xl px-[20px] pt-[20px] pb-[24px]">
+                    <img src="assets/frame.png" alt="" class="lg:w-[216px]">
+                    <h2 class="text-emerald-600 text-[16px] md:w-165px font-medium mt-[26px]">Юла</h2>
+                    <p class="mt-[2px] text-[12px]">350₽</p>
+                </div>
+                <div class="w-[165px] h-fit md:w-[165px] lg:w-[256px] rounded-[12px] hover:shadow-2xl px-[20px] pt-[20px] pb-[24px] truncate">
+                    <img src="assets/frame (1).png" alt="" class="lg:w-[216px]">
+                    <h2 class="text-emerald-600 text-[16px] font-medium mt-[26px]">Брошь «Писец»</h2>
+                    <p class="mt-[2px] text-[12px]">325₽</p>
+                </div>
+                <div class="w-[165px] h-fit md:w-[165px] lg:w-[256px] rounded-[12px] hover:shadow-2xl px-[20px] pt-[20px] pb-[24px]">
+                    <img src="assets/frame (2).png" alt="" class="lg:w-[216px]">
+                    <h2 class="text-emerald-600 text-[16px] font-medium mt-[26px]">Брелок «Бубен-шаман»</h2>
+                    <p class="mt-[2px] text-[12px]">300₽</p>
+                </div>
+                <div class="w-[165px] h-fit md:w-[165px] lg:w-[256px] rounded-[12px] hover:shadow-2xl px-[20px] pt-[20px] pb-[24px]">
+                    <img src="assets/frame (3).png" alt="" class="lg:w-[256px]">
+                    <h2 class="text-emerald-600 text-[16px] font-medium mt-[26px]">Композиция «Охота»</h2>
+                    <p class="mt-[2px] text-[12px]">2500₽</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mt-[100px] bg-gradient-to-r from-blue-900 to-emerald-500 relative">
+        <div class="container mx-auto flex items-center">
+            <img src="assets/Illustration line.png" alt="" class="object-cover absolute right-0 bottom-0 hidden md:block">
+            <div class="w-sm-[500px] ml-[20px] p-3 text-white pt-[20px] md:ml-0 relative z-20 md:mr-auto">
+                <img src="assets/Rectangle 28.png" alt="" class="absolute -top-[50px]">
+                <h1 class="text-2xl mt-[10px] md:text-[35px] max-[860px]:max-w-[360px]">Визит Ямал</h1>
+                <p class="mt-[40px] md:max-w-[328px] text-sm max-w-[360px] lg:min-w-[500px]">Публикуем лучшие фотографии по хештегу <br> <span class="text-emerald-600">#visityamal</span> из Instagram</p>
+                <button class="rounded-[7px] bg-emerald-600 pt-[10px] px-5 py-3 mt-[28px] text-white mb-[22px] text-xs">Перейти в Instagram </button>
+            </div>
+            <div class="flex items-center hidden md:block relative z-10">
+                <img src="assets/icon (7).png" alt="" class="absolute right-[500px] -top-[70px]">
+                <img src="assets/icon (6).png" alt="" class="absolute -top-[50px] right-[30px] z-50">
+                <img src="assets/photo_card (1).png" alt="" class="opacity-100 absolute right-[200px] -top-[50px] z-30 hover:z-50 hover:scale-110 transition-all rounded-[12px] relative">
+                <img src="assets/photo_card.png" alt=""  class="opacity-100 absolute right-[30px] top-[40px] z-30 hover:z-50 hover:scale-110 transition-all rounded-[12px]">
+            </div>
+        </div>
+    </section>
+    <img src="assets/icon (5).png" alt="" class="mx-auto block relative bottom-[40px] hidden md:block">
+    <section class="w-100 overflow-auto md:overflow-visible mt-[50px] md:w-[95%] mx-auto max-w-[1000px] pb-[50px]">
+        <div class="flex w-[924px] mx-auto justify-between pl-[10px] md:w-[100%] md:pl-0 relative items-center">
+            <img src="assets/button_icon (2).png" alt="" class="-left-[20px] absolute rotate-180 hidden md:block">
+            <img src="assets/Rectangle 41.png" alt="" class="block shrink-1 md:w-[165px] lg:w-[216px]">
+            <img src="assets/Rectangle 44.png" alt="" class="block shrink-1 md:w-[165px] lg:w-[216px]">
+            <img src="assets/Rectangle 43.png" alt="" class="block shrink-1 md:w-[165px] lg:w-[216px]">
+            <img src="assets/Rectangle 42.png" alt="" class="block shrink-1 md:w-[165px] lg:w-[216px]">
+            <img src="assets/button_icon (2).png" alt="" class="-right-[20px] absolute hidden md:block">
+        </div>
+    </section>
+    <img src="assets/scroll.png" alt="" class="w-[70%] mx-auto mb-[50px] hidden lg:block max-w-[1100px]">
+    <footer class="bg-[#e6e6e6] pt-[50px] pb-[25px]">
+        <div class="grid lg:grid-cols-5 md:grid-cols-3 mx-auto max-w-[1050px] grid-cols-1 gap-[20px] grid-rows-[20px] w-[96%]">
+            <img src="assets/Logo full.png" alt="" class="mr-auto ml-[15px] md:mx-0 relative bottom-[20px] md:bottom-0">
+            <p class="ml-[15px] font-semibold md:ml-0">О Ямале</p>
+            <div class="w-[97%] mx-auto bg-[#d8d8d8] h-[2px] md:hidden"></div>
+            <p class="ml-[15px] font-semibold md:ml-0">Блог</p>
+            <div class="w-[97%] mx-auto bg-[#d8d8d8] h-[2px] md:hidden"></div>
+            <p class="lg:hidden hidden md:block"></p>
+            <p class="ml-[15px] font-semibold md:ml-0">Афиша</p>
+            <div class="w-[97%] mx-auto bg-[#d8d8d8] h-[2px] md:hidden"></div>
+            <p class="ml-[15px] font-semibold md:ml-0">Планирование поездки</p>
+            <div class="w-[97%] mx-auto bg-[#d8d8d8] h-[2px] md:hidden"></div>
+            <p class="lg:hidden hidden md:block"></p>
+            <p class="hidden lg:block"></p>
+            <p class="ml-[15px] font-semibold md:ml-0">Чем заняться</p>
+            <div class="w-[97%] mx-auto bg-[#d8d8d8] h-[2px] md:hidden"></div>
+            <p class="ml-[15px] font-semibold md:ml-0">Экскурсии</p>
+            <div class="w-[97%] mx-auto bg-[#d8d8d8] h-[2px] md:hidden"></div>
+            <p class="lg:hidden hidden md:block"></p>
+            <p class="ml-[15px] font-semibold md:ml-0">Обработка данных</p>
+            <div class="w-[97%] mx-auto bg-[#d8d8d8] h-[2px] md:hidden"></div>
+            <p class="ml-[15px] font-semibold md:ml-0 mb-[25px] md:mb-0">Туристические направления</p>
+            <p class="md:mt-[20px] ml-[15px] text-[#b3b3b3] md:ml-0">Парнеры:</p>
+            <p class="md:mt-[20px] ml-[15px] text-[#b3b3b3] md:ml-0">Ямал Ири</p>
+            <p class="md:mt-[20px] ml-[15px] text-[#b3b3b3] md:ml-0">День Оленевода</p>
+            <p class="lg:hidden hidden md:block"></p>
+            <p class="lg:mt-[20px] ml-[15px] text-[#b3b3b3] md:ml-0">Культура Ямала</p>
+            <p class="lg:mt-[20px] ml-[15px] text-[#b3b3b3] md:ml-0">Восхождение на гору Рай-Из</p>
+        </div>
+        <div class="w-[97%] mx-auto bg-[#d8d8d8] h-[2px] mb-[40px] mt-[40px]"></div>
+        <div class="flex justify-between items-center w-[85%] max-w-[1080px] mx-auto flex-col md:flex-row">
+            <img src="assets/social_media.png" alt="">
+            <div class="text-[#009974] flex w-[100%] justify-between md:w-[40%]">
+                <p class="min-w-[140px]">+7 (349) 224-49-49</p>
+                <p>info@visityamal.ru</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
